@@ -1,0 +1,8 @@
+__title__ = "rpg_utils"
+__description__ = "Paket-Fassade fuer rpg_utils."
+__url__ = "[https://github.com/](https://github.com/)RalfPeter/rpg_utils"
+__version__ = "1.0"
+__author__ = "RalfPeter"
+__author_email__ = "ralfpeter.bergheim@gmail.com"
+__license__ = "MIT"
+__copyright__ = "Copyright 2026 RalfPeter"
