@@ -1,23 +1,29 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 04-08-2026
-# Ralf Peter <ralfpeter61@email.de>
-# https://github.com/RalfPeter/tracktraffic.git
+# 10-08-2026
+# RalfPeter <ralfpeter.bergheim@gmail.com>
+# https://github.com/RalfPeter/
 #
 # Released under GNU GENERAL PUBLIC LICENSE v3. (Use at your own risk)
 # ------------------------------------------------------------------------------
-#  Program : utils_string.py (main - GoPro Videos and Telemetry Export)
-#  Version : 1.0
+#  Programm          : utils_string.py
+#  Version           : 2.0
+#  Beschreibung      : Keine Beschreibung verfügbar.
+#  Zeilen            : 125
+#  Abhängigkeiten    : datetime, typing
+#  Klassen           : StringUtils
 # ------------------------------------------------------------------------------
-#  Klassen:
-#     StringUtils
-#  Public Methods:
-#     StringUtils.decode_bytes(value)     → Konvertiert ein Byte-Objekt in einen String mittels UTF-8 oder gibt
-#     StringUtils.replace_placeholders(pattern, dt, basename, user, fallback_name) → Ersetzt Platzhalter im gegebenen Muster robust gegen doppelte '%'
-#     StringUtils.safe_str(val, default)  → Wandelt einen Wert in String um oder gibt Default zurück.
-#     sstr(val, default)                  → Wandelt einen Wert in String um oder gibt Default zurück.
+#  Public Methoden:
+#    StringUtils                                          → Statische Klasse zur Kapselung von String-Operationen wie
+#      decode_bytes(bytes | str)                          → Konvertiert ein Byte-Objekt in einen String mittels UTF-8 oder gibt
+#      replace_placeholders(str, datetime, str, 
+#                           str, str)                     → Ersetzt Platzhalter im gegebenen Muster robust gegen doppelte '%'
+#      safe_str(Any, str)                                 → Wandelt einen Wert in String um oder gibt Default zurück.
 # ------------------------------------------------------------------------------
-#  Copyright (C) 2026 <ralfpeter61@email.de>
+#  Globale Funktionen:
+#    sstr(Any, str)                                       → Wandelt einen Wert in String um oder gibt Default zurück.
+# ------------------------------------------------------------------------------
+#  Copyright (C) 2026 <ralfpeter.bergheim@gmail.com>
 # ------------------------------------------------------------------------------
 
 from datetime import datetime
@@ -28,10 +34,7 @@ from typing import Any
 # String Utilities
 # ================================================================================
 class StringUtils:
-    """
-    Statische Klasse zur Kapselung von String-Operationen wie
-    Dekodierung und Platzhalterersetzung.
-    """
+    """Statische Klasse zur Kapselung von String-Operationen wie"""
 
     # --------------------------------------------------------------------------------
     @staticmethod
@@ -128,11 +131,23 @@ class StringUtils:
     # --------------------------------------------------------------------------------
     @staticmethod
     def safe_str(val: Any, default: str = "") -> str:
-        """Wandelt einen Wert in String um oder gibt Default zurück."""
+        """Wandelt einen Wert in String um oder gibt Default zurück.
+        
+        :param val: (Any) Beschreibung von val.
+        :param default: (str) Beschreibung von default.
+        :return: (str) Beschreibung des Rückgabewerts.
+        """
+
         return str(val) if val is not None else default
 
 
 # --------------------------------------------------------------------------------
 def sstr(val: Any, default: str = "") -> str:
-    """Wandelt einen Wert in String um oder gibt Default zurück."""
+    """Wandelt einen Wert in String um oder gibt Default zurück.
+    
+    :param val: (Any) Beschreibung von val.
+    :param default: (str) Beschreibung von default.
+    :return: (str) Beschreibung des Rückgabewerts.
+    """
+
     return str(val) if val is not None else default

@@ -1,21 +1,24 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 04-08-2026
-# Ralf Peter <ralfpeter61@email.de>
-# https://github.com/RalfPeter/tracktraffic.git
+# 10-08-2026
+# RalfPeter <ralfpeter.bergheim@gmail.com>
+# https://github.com/RalfPeter/
 #
 # Released under GNU GENERAL PUBLIC LICENSE v3. (Use at your own risk)
 # ------------------------------------------------------------------------------
-#  Program : utils_http.py (main - GoPro Videos and Telemetry Export)
-#  Version : 1.0
+#  Programm          : utils_http.py
+#  Version           : 2.0
+#  Beschreibung      : Keine Beschreibung verfügbar.
+#  Zeilen            : 144
+#  Abhängigkeiten    : http, requests, typing
+#  Klassen           : HttpUtils
 # ------------------------------------------------------------------------------
-#  Klassen:
-#     HttpUtils
-#  Public Methods:
-#     HttpUtils.get_content_from_url(url, error_message, timeout) → Lädt Inhalte von einer URL herunter (GET-Anfrage).
-#     HttpUtils.post_content_to_url(url, error_message, timeout) → Sendet einen POST-Request an die URL.
+#  Public Methoden:
+#    HttpUtils                                            → Statische Klasse zur Kapselung von HTTP-Anfragen (GET und POST) mit
+#      get_content_from_url(str, str, int)                → Lädt Inhalte von einer URL herunter (GET-Anfrage).
+#      post_content_to_url(str, str, int)                 → Sendet einen POST-Request an die URL.
 # ------------------------------------------------------------------------------
-#  Copyright (C) 2026 <ralfpeter61@email.de>
+#  Copyright (C) 2026 <ralfpeter.bergheim@gmail.com>
 # ------------------------------------------------------------------------------
 
 from requests import get, post
@@ -39,10 +42,8 @@ _T = TypeVar('_T')
 # ================================================================================
 # ================================================================================
 class HttpUtils:
-    """
-    Statische Klasse zur Kapselung von HTTP-Anfragen (GET und POST) mit
-    robuster Fehlerbehandlung (SSL, Timeout).
-    """
+    """Statische Klasse zur Kapselung von HTTP-Anfragen (GET und POST) mit"""
+
     status_ok = HTTPStatus.OK
     status_not_found = HTTPStatus.NOT_FOUND
     status_not_modified = HTTPStatus.NOT_MODIFIED

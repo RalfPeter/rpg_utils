@@ -1,35 +1,39 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 04-08-2026
-# Ralf Peter <ralfpeter61@email.de>
-# https://github.com/RalfPeter/tracktraffic.git
+# 10-08-2026
+# RalfPeter <ralfpeter.bergheim@gmail.com>
+# https://github.com/RalfPeter/
 #
 # Released under GNU GENERAL PUBLIC LICENSE v3. (Use at your own risk)
 # ------------------------------------------------------------------------------
-#  Program : utils_filepath.py (main - GoPro Videos and Telemetry Export)
-#  Version : 1.0
+#  Programm          : utils_filepath.py
+#  Version           : 2.0
+#  Beschreibung      : Keine Beschreibung verfügbar.
+#  Zeilen            : 417
+#  Abhängigkeiten    : datetime, pathlib, platform, re, sys, tempfile
+#  Klassen           : PathUtils
 # ------------------------------------------------------------------------------
-#  Klassen:
-#     PathUtils
-#  Public Methods:
-#     PathUtils.validate_input_directories(inputpaths, verbose) → Prüft, ob alle Pfade in `inputpaths` existierende Verzeichnisse sind.
-#     PathUtils.get_subdirectories(directories, recursive) → Gibt eine sortierte Liste aller Unterverzeichnisse (einschließlich der
-#     PathUtils.safe_rename(src, dst, verbose) → Benennt eine Datei sicher um und behandelt gängige Fehler (FileNotFound,
-#     PathUtils.get_basename_without_prefix(file) → Extrahiert den Basisnamen einer Datei, entfernt dabei einen
-#     PathUtils.create_new_filepath(file, dt) → Erzeugt einen neuen Dateipfad basierend auf einem datetime-Objekt und
-#     PathUtils.rename_file_with_datetime(file, dt) → Benennt eine Datei anhand eines datetime-Objekts um, falls der
-#     PathUtils.is_writable(directory)    → Prüft, ob in das angegebene Verzeichnis geschrieben werden kann.
-#     PathUtils.get_config_dir(app_name, verbose) → Ermittelt das plattformspezifische Verzeichnis für Konfigurationsdateien.
-#     PathUtils.get_script_dir(verbose)   → Gibt den Pfad des Ordners zurück, in dem das Skript/die ausführbare Datei
-#     PathUtils.get_main_script_name()    → Gibt den reinen Dateinamen des gestarteten Hauptskripts zurück.
-#     PathUtils.get_script_name(suffix, verbose) → Gibt den reinen Dateinamen des gestarteten Hauptskripts oder der EXE zurück.
-#     PathUtils.get_temp_dir(verbose)     → Ermittelt das systemweite Verzeichnis für temporäre Dateien.
-#     PathUtils.get_work_dir(verbose)     → Gibt den Pfad des temporären Ordners zurück, falls das Skript
-#     PathUtils.get_data_dir(app_name, verbose) → Gibt den Path zum Datenordner ('data') im Skript / Config Verzeichnis zurück.
-#     PathUtils.get_resource_dir()        → Gibt den Path zum Ressourcenordner ('resources') im im Skriptverzeichnis zurück.
-#     PathUtils.get_ui_dir()              → Path of UI folder
+#  Public Methoden:
+#    PathUtils                                            → Statische Klasse zur Kapselung aller Hilfsfunktionen für Dateipfade und
+#      validate_input_directories(list[str], bool)        → Prüft, ob alle Pfade in `inputpaths` existierende Verzeichnisse sind.
+#      get_subdirectories(list[str], bool)                → Gibt eine sortierte Liste aller Unterverzeichnisse (einschließlich der
+#      safe_rename(Path | str, Path | str, bool)          → Benennt eine Datei sicher um und behandelt gängige Fehler (FileNotFound,
+#      get_basename_without_prefix(Path | str)            → Extrahiert den Basisnamen einer Datei, entfernt dabei einen
+#      create_new_filepath(Path | str, datetime)          → Erzeugt einen neuen Dateipfad basierend auf einem datetime-Objekt und
+#      rename_file_with_datetime(Path | str, 
+#                                datetime)                → Benennt eine Datei anhand eines datetime-Objekts um, falls der
+#      is_writable(Path)                                  → Prüft, ob in das angegebene Verzeichnis geschrieben werden kann.
+#      get_config_dir(str, bool)                          → Ermittelt das plattformspezifische Verzeichnis für Konfigurationsdateien.
+#      get_script_dir(bool)                               → Gibt den Pfad des Ordners zurück, in dem das Skript/die ausführbare Datei
+#      get_main_script_name()                             → Gibt den reinen Dateinamen des gestarteten Hauptskripts zurück.
+#      get_script_name(str, bool)                         → Gibt den reinen Dateinamen des gestarteten Hauptskripts oder der EXE zurück.
+#      get_temp_dir(bool)                                 → Ermittelt das systemweite Verzeichnis für temporäre Dateien.
+#      get_work_dir(bool)                                 → Gibt den Pfad des temporären Ordners zurück, falls das Skript
+#      get_data_dir(str, bool)                            → Gibt den Path zum Datenordner ('data') im Skript / Config Verzeichnis zurück.
+#      get_resource_dir()                                 → Gibt den Path zum Ressourcenordner ('resources') im im Skriptverzeichnis zurück.
+#      get_ui_dir()                                       → Path of UI folder
 # ------------------------------------------------------------------------------
-#  Copyright (C) 2026 <ralfpeter61@email.de>
+#  Copyright (C) 2026 <ralfpeter.bergheim@gmail.com>
 # ------------------------------------------------------------------------------
 
 import sys
@@ -57,12 +61,7 @@ ENCODING_ISO = 'iso-8859-1'
 # Path Utilities
 # ================================================================================
 class PathUtils:
-    """
-    Statische Klasse zur Kapselung aller Hilfsfunktionen für Dateipfade und
-    Dateinamen (files and paths).
-
-    Alle Methoden sind als @staticmethod implementiert.
-    """
+    """Statische Klasse zur Kapselung aller Hilfsfunktionen für Dateipfade und"""
 
     # Klassenkonstanten für häufig verwendete Ordnernamen
     FOLDER_RESOURCES: str = 'resources'
@@ -349,9 +348,10 @@ class PathUtils:
     @staticmethod
     def get_main_script_name() -> str:
         """Gibt den reinen Dateinamen des gestarteten Hauptskripts zurück.
-
-        :return: (str) Der Dateiname (z.B. 'prg_gopro2file.py').
+        
+        :return: (str) Beschreibung des Rückgabewerts.
         """
+
         if sys.argv and sys.argv[0]:
             return Path(sys.argv[0]).name
         return "Unbekannt"
@@ -386,11 +386,12 @@ class PathUtils:
     # --------------------------------------------------------------------------------
     @staticmethod
     def get_temp_dir(verbose: bool = False) -> Path:
+        """Ermittelt das systemweite Verzeichnis für temporäre Dateien.
+        
+        :param verbose: (bool) Beschreibung von verbose.
+        :return: (Path) Beschreibung des Rückgabewerts.
         """
-        Ermittelt das systemweite Verzeichnis für temporäre Dateien.
 
-        :return: (Path) Der absolute Pfad zum temporären Verzeichnis.
-        """
         # tempfile.gettempdir() liefert den Pfad als String zurück
         path = Path(tempfile.gettempdir()).resolve()
         if verbose:
@@ -436,15 +437,19 @@ class PathUtils:
     # --------------------------------------------------------------------------------
     @staticmethod
     def get_resource_dir() -> Path:
+        """Gibt den Path zum Ressourcenordner ('resources') im im Skriptverzeichnis zurück.
+        
+        :return: (Path) Beschreibung des Rückgabewerts.
         """
-        Gibt den Path zum Ressourcenordner ('resources') im im Skriptverzeichnis zurück.
-        """
+
         return PathUtils.get_work_dir() / PathUtils.FOLDER_RESOURCES
 
     # --------------------------------------------------------------------------------
     @staticmethod
     def get_ui_dir() -> Path:
+        """Path of UI folder
+        
+        :return: (Path) Beschreibung des Rückgabewerts.
         """
-        Path of UI folder
-        """
+
         return PathUtils.get_work_dir() / PathUtils.FOLDER_UI

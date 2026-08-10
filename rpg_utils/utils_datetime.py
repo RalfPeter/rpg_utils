@@ -1,32 +1,37 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 04-08-2026
-# Ralf Peter <ralfpeter61@email.de>
-# https://github.com/RalfPeter/tracktraffic.git
+# 10-08-2026
+# RalfPeter <ralfpeter.bergheim@gmail.com>
+# https://github.com/RalfPeter/
 #
 # Released under GNU GENERAL PUBLIC LICENSE v3. (Use at your own risk)
 # ------------------------------------------------------------------------------
-#  Program : utils_datetime.py (main - GoPro Videos and Telemetry Export)
-#  Version : 1.0
+#  Programm          : utils_datetime.py
+#  Version           : 2.0
+#  Beschreibung      : Keine Beschreibung verfügbar.
+#  Zeilen            : 561
+#  Abhängigkeiten    : datetime, fractions, re, typing, tzlocal, zoneinfo
+#  Klassen           : DateTimeUtils
 # ------------------------------------------------------------------------------
-#  Klassen:
-#     DateTimeUtils
-#  Public Methods:
-#     DateTimeUtils.add_timedelta(dt, delta) → Addiert auf ein DateTime eine Anzahl Sekunden oder ein timedelta auf.
-#     DateTimeUtils.format_datetime(dt, format_str, delta, tz) → Formatiert ein datetime-Objekt in einen String, nach optionaler Anwendung einer
-#     DateTimeUtils.convert_to_offset_str(dt) → Konvertiert den Zeitzonen-Offset in das Format '+HH:MM' (entspricht timezone_to_str).
-#     DateTimeUtils.create_aware_base_datetime(year, month, day, hour, minute, second, microsecond, tz) → Erstellt ein zeitzonen-bewusstes datetime-Objekt mit anpassbaren Basisdaten.
-#     DateTimeUtils.delta_time(par_timedata, par_delta, par_tformat) → Konvertiert einen Timestamp-String oder ein datetime-Objekt in ein UTC-datetime,
-#     DateTimeUtils.convert_to_timezone(dt, tz) → Konvertiert ein datetime-Objekt in die angegebene Zeitzone.
-#     DateTimeUtils.datetime_diff(start_zeit, ende_zeit) → Berechnet die Zeitdifferenz zwischen zwei datetime-Objekten.
-#     DateTimeUtils.parse_datetime_string(string, is_aware) → Parst einen Datums-String anhand bekannter Formate (ISO 8601, EXIF, IPTC).
-#     DateTimeUtils.get_timezone_hour_offset(dt) → Ermittelt den Stunden-Offset der Zeitzone eines datetime-Objekts.
-#     DateTimeUtils.parse_offset(offset_str) → Analysiert einen Zeitzonen-Offset-String und konvertiert ihn in ein datetime.timedelta-Objekt.
-#     DateTimeUtils.datetime_to_fractions(dt) → Konvertiert Stunden, Minuten und Sekunden eines datetime-Objekts in rationale Strings.
-#     DateTimeUtils.prepare_exif_datetime_fields(dto, offset) → Verarbeitet die Rohwerte des Datums und Offsets, um ein vollständiges
-#     DateTimeUtils.prepare_iptc_datetime_fields(dto_raw, offset_raw) → Konvertiert EXIF-Datum und Offset in die Zielformate für IPTC und gibt
+#  Public Methoden:
+#    DateTimeUtils                                        → Statische Klasse zur Kapselung aller Datums-, Zeit- und Zeitzonen-Hilfsfunktionen.
+#      add_timedelta(datetime, int | timedelta)           → Addiert auf ein DateTime eine Anzahl Sekunden oder ein timedelta auf.
+#      format_datetime(datetime, str, timedelta, 
+#                      str | tzinfo)                      → Formatiert ein datetime-Objekt in einen String, nach optionaler Anwendung einer
+#      convert_to_offset_str(datetime)                    → Konvertiert den Zeitzonen-Offset in das Format '+HH:MM' (entspricht timezone_to_str).
+#      create_aware_base_datetime(int, int, int, 
+#                                 int, int, int, int, str | tzinfo) → Erstellt ein zeitzonen-bewusstes datetime-Objekt mit anpassbaren Basisdaten.
+#      delta_time(str | datetime, timedelta, str)         → Konvertiert einen Timestamp-String oder ein datetime-Objekt in ein UTC-datetime,
+#      convert_to_timezone(datetime, str | tzinfo)        → Konvertiert ein datetime-Objekt in die angegebene Zeitzone.
+#      datetime_diff(datetime, datetime)                  → Berechnet die Zeitdifferenz zwischen zwei datetime-Objekten.
+#      parse_datetime_string(str, bool)                   → Parst einen Datums-String anhand bekannter Formate (ISO 8601, EXIF, IPTC).
+#      get_timezone_hour_offset(datetime)                 → Ermittelt den Stunden-Offset der Zeitzone eines datetime-Objekts.
+#      parse_offset(str)                                  → Analysiert einen Zeitzonen-Offset-String und konvertiert ihn in ein datetime.timedelta-Objekt.
+#      datetime_to_fractions(datetime)                    → Konvertiert Stunden, Minuten und Sekunden eines datetime-Objekts in rationale Strings.
+#      prepare_exif_datetime_fields(str, str)             → Verarbeitet die Rohwerte des Datums und Offsets, um ein vollständiges
+#      prepare_iptc_datetime_fields(str, str)             → Konvertiert EXIF-Datum und Offset in die Zielformate für IPTC und gibt
 # ------------------------------------------------------------------------------
-#  Copyright (C) 2026 <ralfpeter61@email.de>
+#  Copyright (C) 2026 <ralfpeter.bergheim@gmail.com>
 # ------------------------------------------------------------------------------
 
 import re
@@ -75,15 +80,7 @@ IPTC_DATETIME: Final[str] = f"{ISO_COMPONENT_DATE} {ISO_COMPONENT_TIME}"  # (nur
 # Klassenstruktur zur Organisation der Funktionen
 # ================================================================================
 class DateTimeUtils:
-    """
-    Statische Klasse zur Kapselung aller Datums-, Zeit- und Zeitzonen-Hilfsfunktionen.
-
-    Alle Methoden sind als @staticmethod implementiert, da sie keinen
-    internen Klassenzustand benötigen.
-
-    Kapselt die Logik zur Konvertierung von Zeitstempeln aus verschiedenen
-    Quellen (Encoder) in zeitzonen-bewusste datetime-Objekte.
-    """
+    """Statische Klasse zur Kapselung aller Datums-, Zeit- und Zeitzonen-Hilfsfunktionen."""
 
     # --------------------------------------------------------------------------------
     @staticmethod
@@ -494,18 +491,20 @@ class DateTimeUtils:
     # --------------------------------------------------------------------------------
     @staticmethod
     def datetime_to_fractions(dt: datetime | None) -> str | None:
-        """
-        Konvertiert Stunden, Minuten und Sekunden eines datetime-Objekts in rationale Strings.
-        :param dt: Das datetime-Objekt.
-        :return: Ein String der Form 'H/N M/D S/E'.
+        """Konvertiert Stunden, Minuten und Sekunden eines datetime-Objekts in rationale Strings.
+        
+        :param dt: (datetime | None) Beschreibung von dt.
+        :return: (str | None) Beschreibung des Rückgabewerts.
         """
 
+        # --------------------------------------------------------------------------------
         def number_to_rational_str(number: float) -> str:
+            """Konvertiert eine Gleitkommazahl in einen rationalen String (Zähler/Nenner).
+            
+            :param number: (float) Beschreibung von number.
+            :return: (str) Beschreibung des Rückgabewerts.
             """
-            Konvertiert eine Gleitkommazahl in einen rationalen String (Zähler/Nenner).
-            :param number: Die Zahl.
-            :return: Der rationale String (z.B. '1/2').
-            """
+
             fraction = Fraction(number).limit_denominator(max_denominator=10 ** 6)
             return f'{fraction.numerator}/{fraction.denominator}'
 

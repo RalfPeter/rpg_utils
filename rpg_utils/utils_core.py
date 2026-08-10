@@ -1,40 +1,44 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 06-08-2026
-# Ralf Peter <ralfpeter61@email.de>
-# https://github.com/RalfPeter/tracktraffic.git
+# 10-08-2026
+# RalfPeter <ralfpeter.bergheim@gmail.com>
+# https://github.com/RalfPeter/
 #
 # Released under GNU GENERAL PUBLIC LICENSE v3. (Use at your own risk)
 # ------------------------------------------------------------------------------
-#  Program : utils_core.py (main - GoPro Videos and Telemetry Export)
-#  Version : 1.0
+#  Programm          : utils_core.py
+#  Version           : 2.0
+#  Beschreibung      : Keine Beschreibung verfügbar.
+#  Zeilen            : 546
+#  Abhängigkeiten    : ctypes, dataclasses, enum, inspect, logging, pathlib, sys, textwrap, traceback, typing
+#  Klassen           : CallbackTag, ProgressType, ProgressEvent, AppCallback, DummyStream, AppLogger
 # ------------------------------------------------------------------------------
-#  Klassen:
-#     CallbackTag
-#     ProgressType
-#     ProgressEvent
-#     AppCallback
-#     DummyStream
-#     AppLogger
-#  Public Methods:
-#     ProgressEvent.start(total)          → Keine Beschreibung.
-#     ProgressEvent.update(current, total) → Keine Beschreibung.
-#     ProgressEvent.finished()            → Keine Beschreibung.
-#     DummyStream.write(_message)         → Ignoriert Schreiboperationen.
-#     DummyStream.flush()                 → Erfüllt das Stream-Interface.
-#     AppLogger.create(logfile_path, use_console) → Factory-Methode: Erstellt, konfiguriert und registriert den Logger in einem Schritt.
-#     AppLogger.logfile()                 → :return: (Path | None) Der aktuelle Pfad zur Logdatei (nur lesen).
-#     AppLogger.gui_callback()            → Gibt den aktuellen GUI-Callback zurück.
-#     AppLogger.gui_callback(value)       → Setzt den GUI-Callback (sollte ein Signal-Emit sein).
-#     AppLogger.progress_callback()       → Gibt den aktuellen Progress-Callback zurück.
-#     AppLogger.progress_callback(value)  → Setzt den Progress-Callback (sollte ein Signal-Emit sein).
-#     fatal(msg, exitcode)                → Gibt eine optionale Fehlermeldung aus und beendet das Skript.
-#     initialize_windows_app_id(company, program, version) → Registriert die Anwendung explizit beim Windows-System, damit das
-#     setup_crash_logger()                → Registriert einen globalen excepthook für unerwartete Abstürze.
-#     write_crash_file(message)           → Zentrale Hilfsfunktion zum Schreiben in die CRASH_LOG.txt.
-#     log_to_callback(tag)                → Zentrale Schnittstelle für alle Frameworks.
+#  Public Methoden:
+#    ProgressEvent                                        → Keine Beschreibung.
+#      start(int)                                         → Keine Beschreibung.
+#      update(int, int)                                   → Keine Beschreibung.
+#      finished()                                         → Keine Beschreibung.
+#
+#    DummyStream                                          → Null-Object-Pattern für sys.stdout/stderr in GUI-Umgebungen.
+#      write(str)                                         → Ignoriert Schreiboperationen.
+#      flush()                                            → Erfüllt das Stream-Interface.
+#
+#    AppLogger                                            → Zentrale Klasse für Logging-Mechanismen, Handler und GUI-Callbacks.
+#      create(Path, bool)                                 → Factory-Methode: Erstellt, konfiguriert und registriert den Logger in einem Schritt.
+#      logfile()                                          → :return: (Path | None) Der aktuelle Pfad zur Logdatei (nur lesen).
+#      gui_callback()                                     → Gibt den aktuellen GUI-Callback zurück.
+#      gui_callback(GuiCallback)                          → Setzt den GUI-Callback (sollte ein Signal-Emit sein).
+#      progress_callback()                                → Gibt den aktuellen Progress-Callback zurück.
+#      progress_callback(ProgressCallback)                → Setzt den Progress-Callback (sollte ein Signal-Emit sein).
 # ------------------------------------------------------------------------------
-#  Copyright (C) 2026 <ralfpeter61@email.de>
+#  Globale Funktionen:
+#    fatal(str, int)                                      → Gibt eine optionale Fehlermeldung aus und beendet das Skript.
+#    initialize_windows_app_id(str, str, str)             → Registriert die Anwendung explizit beim Windows-System, damit das
+#    setup_crash_logger()                                 → Registriert einen globalen excepthook für unerwartete Abstürze.
+#    write_crash_file(str)                                → Zentrale Hilfsfunktion zum Schreiben in die CRASH_LOG.txt.
+#    log_to_callback(CallbackTag)                         → Zentrale Schnittstelle für alle Frameworks.
+# ------------------------------------------------------------------------------
+#  Copyright (C) 2026 <ralfpeter.bergheim@gmail.com>
 # ------------------------------------------------------------------------------
 
 from __future__ import annotations
@@ -83,6 +87,8 @@ class CallbackTag(Enum):
 # ================================================================================
 # ================================================================================
 class ProgressType(Enum):
+    """Kurzbeschreibung für ProgressType."""
+
     START = auto()
     UPDATE = auto()
     FINISHED = auto()
@@ -92,6 +98,8 @@ class ProgressType(Enum):
 # ================================================================================
 @dataclass(frozen=True)
 class ProgressEvent:
+    """Kurzbeschreibung für ProgressEvent."""
+
     type: ProgressType
     current: int = 0
     total: int = 0
@@ -100,16 +108,34 @@ class ProgressEvent:
     # --------------------------------------------------------------------------------
     @classmethod
     def start(cls, total: int) -> ProgressEvent:
+        """Kurzbeschreibung für start.
+        
+        :param total: (int) Beschreibung von total.
+        :return: (ProgressEvent) Beschreibung des Rückgabewerts.
+        """
+
         return cls(type=ProgressType.START, total=total)
 
     # --------------------------------------------------------------------------------
     @classmethod
     def update(cls, current: int, total: int) -> ProgressEvent:
+        """Kurzbeschreibung für update.
+        
+        :param current: (int) Beschreibung von current.
+        :param total: (int) Beschreibung von total.
+        :return: (ProgressEvent) Beschreibung des Rückgabewerts.
+        """
+
         return cls(type=ProgressType.UPDATE, current=current, total=total)
 
     # --------------------------------------------------------------------------------
     @classmethod
     def finished(cls) -> ProgressEvent:
+        """Kurzbeschreibung für finished.
+        
+        :return: (ProgressEvent) Beschreibung des Rückgabewerts.
+        """
+
         return cls(type=ProgressType.FINISHED)
 
 
@@ -127,18 +153,20 @@ ProgressCallback: TypeAlias = Callable[[ProgressEvent], None]
 class AppCallback(Protocol):
     
     # --------------------------------------------------------------------------------
+    """--------------------------------------------------------------------------------"""
+
     def __call__(self, tag: CallbackTag, *args: Any) -> None:
-        ...
+        """Kurzbeschreibung für __call__.
+        
+        :param tag: (CallbackTag) Beschreibung von tag.
+        :return: (None) Beschreibung des Rückgabewerts.
+        """
 
 
 # ================================================================================
 # ================================================================================
 class DummyStream:
-    """Null-Object-Pattern für sys.stdout/stderr in GUI-Umgebungen.
-
-    Verhindert AttributeError (NoneType hat kein Attribut 'write'), wenn die Anwendung
-    mit PyInstaller im fensterbasierten Modus (--noconsole / -w) kompiliert wurde.
-    """
+    """Null-Object-Pattern für sys.stdout/stderr in GUI-Umgebungen."""
 
     # --------------------------------------------------------------------------------
     def write(self, _message: str) -> None:
@@ -150,7 +178,11 @@ class DummyStream:
 
     # --------------------------------------------------------------------------------
     def flush(self) -> None:
-        """Erfüllt das Stream-Interface."""
+        """Erfüllt das Stream-Interface.
+        
+        :return: (None) Beschreibung des Rückgabewerts.
+        """
+
         pass
 
 
@@ -231,7 +263,11 @@ class AppLogger:
     # --------------------------------------------------------------------------------
     @property
     def logfile(self) -> str:
-        """:return: (Path | None) Der aktuelle Pfad zur Logdatei (nur lesen)."""
+        """:return: (Path | None) Der aktuelle Pfad zur Logdatei (nur lesen).
+        
+        :return: (str) Beschreibung des Rückgabewerts.
+        """
+
         if self._logfile is None:
             return "unknown logfile name"
         else:
@@ -240,25 +276,43 @@ class AppLogger:
     # --------------------------------------------------------------------------------
     @property
     def gui_callback(self) -> GuiCallback | None:
-        """Gibt den aktuellen GUI-Callback zurück."""
+        """Gibt den aktuellen GUI-Callback zurück.
+        
+        :return: (GuiCallback | None) Beschreibung des Rückgabewerts.
+        """
+
         return self._gui_callback
 
     # --------------------------------------------------------------------------------
     @gui_callback.setter
     def gui_callback(self, value: GuiCallback | None) -> None:
-        """Setzt den GUI-Callback (sollte ein Signal-Emit sein)."""
+        """Setzt den GUI-Callback (sollte ein Signal-Emit sein).
+        
+        :param value: (GuiCallback | None) Beschreibung von value.
+        :return: (None) Beschreibung des Rückgabewerts.
+        """
+
         self._gui_callback = value
 
     # --------------------------------------------------------------------------------
     @property
     def progress_callback(self) -> ProgressCallback | None:
-        """Gibt den aktuellen Progress-Callback zurück."""
+        """Gibt den aktuellen Progress-Callback zurück.
+        
+        :return: (ProgressCallback | None) Beschreibung des Rückgabewerts.
+        """
+
         return self._progress_callback
 
     # --------------------------------------------------------------------------------
     @progress_callback.setter
     def progress_callback(self, value: ProgressCallback | None) -> None:
-        """Setzt den Progress-Callback (sollte ein Signal-Emit sein)."""
+        """Setzt den Progress-Callback (sollte ein Signal-Emit sein).
+        
+        :param value: (ProgressCallback | None) Beschreibung von value.
+        :return: (None) Beschreibung des Rückgabewerts.
+        """
+
         self._progress_callback = value
 
     # --------------------------------------------------------------------------------
@@ -293,7 +347,11 @@ class AppLogger:
     # --------------------------------------------------------------------------------
     @staticmethod
     def _format_message(*args: Any, level: int = INFO) -> list[str]:
-        """Extrahiert die komplette Formatierungs-Logik."""
+        """Extrahiert die komplette Formatierungs-Logik.
+        
+        :return: (list[str]) Beschreibung des Rückgabewerts.
+        """
+
         lines: list[str] = []
         len_args = len(args)
 
@@ -321,7 +379,12 @@ class AppLogger:
     # --------------------------------------------------------------------------------
     # Dispatcher für Messages
     def _dispatch_output(self, message: str) -> None:
-        """Entscheidet: GUI-Callback ODER Konsole."""
+        """Entscheidet: GUI-Callback ODER Konsole.
+        
+        :param message: (str) Beschreibung von message.
+        :return: (None) Beschreibung des Rückgabewerts.
+        """
+
         if self._gui_callback:
             self._gui_callback(message)
 
@@ -393,9 +456,10 @@ class AppLogger:
     @staticmethod
     def _get_executable_path() -> Path:
         """Ermittelt den Pfad der laufenden Anwendung.
-
-        :return: (Path) Absoluter Pfad.
+        
+        :return: (Path) Beschreibung des Rückgabewerts.
         """
+
         return _get_executable_path()
 
 
@@ -414,9 +478,10 @@ def fatal(msg: str | None = None, exitcode: int = 99) -> None:
 # --------------------------------------------------------------------------------
 def _get_executable_path() -> Path:
     """Ermittelt den Pfad der laufenden Anwendung.
-
-    :return: (Path) Absoluter Pfad.
+    
+    :return: (Path) Beschreibung des Rückgabewerts.
     """
+
     if getattr(sys, "frozen", False):
         return Path(sys.executable).resolve()
     return Path(sys.argv[0]).resolve()
@@ -424,11 +489,14 @@ def _get_executable_path() -> Path:
 
 # --------------------------------------------------------------------------------
 def initialize_windows_app_id(company: str, program: str, version: str = '1.0') -> None:
+    """Registriert die Anwendung explizit beim Windows-System, damit das
+    
+    :param company: (str) Beschreibung von company.
+    :param program: (str) Beschreibung von program.
+    :param version: (str) Beschreibung von version.
+    :return: (None) Beschreibung des Rückgabewerts.
     """
-    Registriert die Anwendung explizit beim Windows-System, damit das
-    Taskleisten-Icon korrekt von der Python-Runtime getrennt und angezeigt wird.
-    Unterdrückt Linter-Warnungen bezüglich dynamischer ctypes-Attribute.
-    """
+
     app_id: str = f"{company.lower()}.{program.lower()}.{version.lower()}"
 
     if sys.platform == "win32":
@@ -447,8 +515,21 @@ def initialize_windows_app_id(company: str, program: str, version: str = '1.0') 
 
 # --------------------------------------------------------------------------------
 def setup_crash_logger() -> None:
-    """Registriert einen globalen excepthook für unerwartete Abstürze."""
+    """Registriert einen globalen excepthook für unerwartete Abstürze.
+    
+    :return: (None) Beschreibung des Rückgabewerts.
+    """
+
+    # --------------------------------------------------------------------------------
     def crash_logger(exctype: type[BaseException], value: BaseException, tb: Any) -> None:
+        """Kurzbeschreibung für crash_logger.
+        
+        :param exctype: (type[BaseException]) Beschreibung von exctype.
+        :param value: (BaseException) Beschreibung von value.
+        :param tb: (Any) Beschreibung von tb.
+        :return: (None) Beschreibung des Rückgabewerts.
+        """
+
         error_msg = "".join(traceback.format_exception(exctype, value, tb))
         base_dir = _get_executable_path().parent
         crash_file = base_dir / CRASH_FILE
@@ -468,7 +549,12 @@ def setup_crash_logger() -> None:
 
 # --------------------------------------------------------------------------------
 def write_crash_file(message: str) -> None:
-    """Zentrale Hilfsfunktion zum Schreiben in die CRASH_LOG.txt."""
+    """Zentrale Hilfsfunktion zum Schreiben in die CRASH_LOG.txt.
+    
+    :param message: (str) Beschreibung von message.
+    :return: (None) Beschreibung des Rückgabewerts.
+    """
+
     base_dir = _get_executable_path().parent
     crash_file = base_dir / CRASH_FILE
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 09-08-2026
+# 10-08-2026
 # RalfPeter <ralfpeter.bergheim@gmail.com>
 # https://github.com/RalfPeter/
 #
@@ -10,7 +10,7 @@
 #  Version           : 2.0
 #  Beschreibung      : Keine Beschreibung verfügbar.
 #  Zeilen            : 236
-#  Abhängigkeiten    : argparse, dataclasses, pathlib, rpg_utils, sys, typing, yaml
+#  Abhängigkeiten    : argparse, dataclasses, pathlib, sys, typing, yaml
 #  Klassen           : BaseConfig, DataclassFieldsMeta, BaseParameters
 # ------------------------------------------------------------------------------
 #  Public Methoden:
