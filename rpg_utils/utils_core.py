@@ -1,44 +1,17 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 10-08-2026
+# 13-08-2026
 # RalfPeter <ralfpeter.bergheim@gmail.com>
 # https://github.com/RalfPeter/
 #
 # Released under GNU GENERAL PUBLIC LICENSE v3. (Use at your own risk)
 # ------------------------------------------------------------------------------
-#  Programm          : utils_core.py
-#  Version           : 2.0
-#  Beschreibung      : Keine Beschreibung verfügbar.
-#  Zeilen            : 546
-#  Abhängigkeiten    : ctypes, dataclasses, enum, inspect, logging, pathlib, sys, textwrap, traceback, typing
-#  Klassen           : CallbackTag, ProgressType, ProgressEvent, AppCallback, DummyStream, AppLogger
-# ------------------------------------------------------------------------------
-#  Public Methoden:
-#    ProgressEvent                                        → Keine Beschreibung.
-#      start(int)                                         → Keine Beschreibung.
-#      update(int, int)                                   → Keine Beschreibung.
-#      finished()                                         → Keine Beschreibung.
-#
-#    DummyStream                                          → Null-Object-Pattern für sys.stdout/stderr in GUI-Umgebungen.
-#      write(str)                                         → Ignoriert Schreiboperationen.
-#      flush()                                            → Erfüllt das Stream-Interface.
-#
-#    AppLogger                                            → Zentrale Klasse für Logging-Mechanismen, Handler und GUI-Callbacks.
-#      create(Path, bool)                                 → Factory-Methode: Erstellt, konfiguriert und registriert den Logger in einem Schritt.
-#      logfile()                                          → :return: (Path | None) Der aktuelle Pfad zur Logdatei (nur lesen).
-#      gui_callback()                                     → Gibt den aktuellen GUI-Callback zurück.
-#      gui_callback(GuiCallback)                          → Setzt den GUI-Callback (sollte ein Signal-Emit sein).
-#      progress_callback()                                → Gibt den aktuellen Progress-Callback zurück.
-#      progress_callback(ProgressCallback)                → Setzt den Progress-Callback (sollte ein Signal-Emit sein).
-# ------------------------------------------------------------------------------
-#  Globale Funktionen:
-#    fatal(str, int)                                      → Gibt eine optionale Fehlermeldung aus und beendet das Skript.
-#    initialize_windows_app_id(str, str, str)             → Registriert die Anwendung explizit beim Windows-System, damit das
-#    setup_crash_logger()                                 → Registriert einen globalen excepthook für unerwartete Abstürze.
-#    write_crash_file(str)                                → Zentrale Hilfsfunktion zum Schreiben in die CRASH_LOG.txt.
-#    log_to_callback(CallbackTag)                         → Zentrale Schnittstelle für alle Frameworks.
-# ------------------------------------------------------------------------------
-#  Copyright (C) 2026 <ralfpeter.bergheim@gmail.com>
+#  Programm           : utils_core.py
+#  Version            : 2.0
+#  Beschreibung       : Keine Beschreibung verfügbar.
+#  Zeilen             : 546
+#  Abhängigkeiten     : ctypes, dataclasses, enum, inspect, logging, pathlib, sys, textwrap, traceback, typing
+#  Klassen            : AppCallback, AppLogger, CallbackTag, DummyStream, ProgressEvent, ProgressType
 # ------------------------------------------------------------------------------
 
 from __future__ import annotations

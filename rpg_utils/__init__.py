@@ -1,4 +1,4 @@
-"""Paket-Fassade fuer rpg_utils."""
+"""Inhaltsübersicht für das Modul rpg_utils."""
 
 from .utils_config import FILE_ENCODING, YAML_INDENT, DEFAULT_APP_NAME, BaseConfig, DataclassFieldsMeta, BaseParameters
 from .utils_core import DEFAULT_LOGGER_NAME, HANDLER_CONSOLE, HANDLER_FILE, CRASH_FILE, MSG_LEN, VALUE_LEN, PREFIX_LEN, PREFIX_FMT, VALUE_FMT, VALUE_NEW_FMT, TRENNER, CallbackTag, ProgressType, ProgressEvent, GuiCallback, ProgressCallback, AppCallback, DummyStream, AppLogger, fatal, initialize_windows_app_id, setup_crash_logger, write_crash_file, log_to_callback

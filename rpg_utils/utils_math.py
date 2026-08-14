@@ -1,35 +1,17 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 10-08-2026
+# 13-08-2026
 # RalfPeter <ralfpeter.bergheim@gmail.com>
 # https://github.com/RalfPeter/
 #
 # Released under GNU GENERAL PUBLIC LICENSE v3. (Use at your own risk)
 # ------------------------------------------------------------------------------
-#  Programm          : utils_math.py
-#  Version           : 2.0
-#  Beschreibung      : Keine Beschreibung verfügbar.
-#  Zeilen            : 257
-#  Abhängigkeiten    : fractions, typing
-#  Klassen           : MathUtils
-# ------------------------------------------------------------------------------
-#  Public Methoden:
-#    MathUtils                                            → Statische Klasse zur Kapselung von mathematischen Operationen und
-#      ceil4(int)                                         → Gibt die nächste ganze Zahl zurück, die größer als oder gleich `n`
-#      to_rational_str(float)                             → Konvertiert eine Zahl in einen rationalen String im Format 'Zähler/Nenner'.
-#      rational_to_float(tuple[int, 
-#                        int] | str | Fraction | Any)     → Konvertiert einen rationalen Wert (Tuple, String oder Fraction) in eine
-#      convert_coord_to_dms(float)                        → Konvertiert eine Koordinate von Dezimalgrad nach Grad, Minuten, Sekunden (DMS).
-#      convert_dms_to_dd(float, float, float)             → Konvertiert Koordinaten von Grad, Minuten, Sekunden (DMS) in Dezimalgrad (DD).
-#      format_coord_as_rational_dms(float)                → Konvertiert eine Dezimalgrad-Koordinate in den rationalen DMS-String-Format
-#      get_geo_refs(float, float)                         → Gibt die geografischen Referenzen (Himmelsrichtungen) als Strings ('N', 'S', 'E', 'W') zurück.
-#      get_geo_ref_multipliers(str, str)                  → Gibt die Multiplikatoren (1 oder -1) basierend auf den geografischen
-#      convert_coords_to_deg_refs(float, float)           → Konvertiert Breitengrad und Längengrad in ein strukturiertes Format.
-#      is_valid_float(float | int | str | Any)            → Prüft, ob der Wert in ein gültiges Float umgewandelt werden kann.
-#      safe_float(float | int | str | Any)                → Wandelt den Wert sicher in ein Float um.
-#      safe_int(Any, int)                                 → Konvertiert einen Wert sicher in int.
-# ------------------------------------------------------------------------------
-#  Copyright (C) 2026 <ralfpeter.bergheim@gmail.com>
+#  Programm           : utils_math.py
+#  Version            : 2.0
+#  Beschreibung       : Keine Beschreibung verfügbar.
+#  Zeilen             : 257
+#  Abhängigkeiten     : fractions, typing
+#  Klassen            : MathUtils
 # ------------------------------------------------------------------------------
 
 from fractions import Fraction

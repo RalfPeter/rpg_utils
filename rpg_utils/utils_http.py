@@ -1,24 +1,20 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 10-08-2026
+# 13-08-2026
 # RalfPeter <ralfpeter.bergheim@gmail.com>
 # https://github.com/RalfPeter/
 #
 # Released under GNU GENERAL PUBLIC LICENSE v3. (Use at your own risk)
 # ------------------------------------------------------------------------------
-#  Programm          : utils_http.py
-#  Version           : 2.0
-#  Beschreibung      : Keine Beschreibung verfügbar.
-#  Zeilen            : 144
-#  Abhängigkeiten    : http, requests, typing
-#  Klassen           : HttpUtils
-# ------------------------------------------------------------------------------
-#  Public Methoden:
-#    HttpUtils                                            → Statische Klasse zur Kapselung von HTTP-Anfragen (GET und POST) mit
-#      get_content_from_url(str, str, int)                → Lädt Inhalte von einer URL herunter (GET-Anfrage).
-#      post_content_to_url(str, str, int)                 → Sendet einen POST-Request an die URL.
-# ------------------------------------------------------------------------------
-#  Copyright (C) 2026 <ralfpeter.bergheim@gmail.com>
+#  Programm           : utils_http.py
+#  Version            : 2.0
+#  Beschreibung       : Keine Beschreibung verfügbar.
+#  Zeilen             : 144
+#  Abhängigkeiten     : argparse, ctypes, dataclasses, datetime, enum, fractions, http, inspect, logging, pathlib
+#                       platform, re, sys, tempfile, textwrap, traceback, typing, zoneinfo
+#  Externe Frameworks : requests, tzlocal, yaml
+#  Eigene Frameworks  : rpg_utils
+#  Klassen            : HttpUtils
 # ------------------------------------------------------------------------------
 
 from requests import get, post

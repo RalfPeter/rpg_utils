@@ -1,37 +1,18 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 10-08-2026
+# 13-08-2026
 # RalfPeter <ralfpeter.bergheim@gmail.com>
 # https://github.com/RalfPeter/
 #
 # Released under GNU GENERAL PUBLIC LICENSE v3. (Use at your own risk)
 # ------------------------------------------------------------------------------
-#  Programm          : utils_datetime.py
-#  Version           : 2.0
-#  Beschreibung      : Keine Beschreibung verfügbar.
-#  Zeilen            : 561
-#  Abhängigkeiten    : datetime, fractions, re, typing, tzlocal, zoneinfo
-#  Klassen           : DateTimeUtils
-# ------------------------------------------------------------------------------
-#  Public Methoden:
-#    DateTimeUtils                                        → Statische Klasse zur Kapselung aller Datums-, Zeit- und Zeitzonen-Hilfsfunktionen.
-#      add_timedelta(datetime, int | timedelta)           → Addiert auf ein DateTime eine Anzahl Sekunden oder ein timedelta auf.
-#      format_datetime(datetime, str, timedelta, 
-#                      str | tzinfo)                      → Formatiert ein datetime-Objekt in einen String, nach optionaler Anwendung einer
-#      convert_to_offset_str(datetime)                    → Konvertiert den Zeitzonen-Offset in das Format '+HH:MM' (entspricht timezone_to_str).
-#      create_aware_base_datetime(int, int, int, 
-#                                 int, int, int, int, str | tzinfo) → Erstellt ein zeitzonen-bewusstes datetime-Objekt mit anpassbaren Basisdaten.
-#      delta_time(str | datetime, timedelta, str)         → Konvertiert einen Timestamp-String oder ein datetime-Objekt in ein UTC-datetime,
-#      convert_to_timezone(datetime, str | tzinfo)        → Konvertiert ein datetime-Objekt in die angegebene Zeitzone.
-#      datetime_diff(datetime, datetime)                  → Berechnet die Zeitdifferenz zwischen zwei datetime-Objekten.
-#      parse_datetime_string(str, bool)                   → Parst einen Datums-String anhand bekannter Formate (ISO 8601, EXIF, IPTC).
-#      get_timezone_hour_offset(datetime)                 → Ermittelt den Stunden-Offset der Zeitzone eines datetime-Objekts.
-#      parse_offset(str)                                  → Analysiert einen Zeitzonen-Offset-String und konvertiert ihn in ein datetime.timedelta-Objekt.
-#      datetime_to_fractions(datetime)                    → Konvertiert Stunden, Minuten und Sekunden eines datetime-Objekts in rationale Strings.
-#      prepare_exif_datetime_fields(str, str)             → Verarbeitet die Rohwerte des Datums und Offsets, um ein vollständiges
-#      prepare_iptc_datetime_fields(str, str)             → Konvertiert EXIF-Datum und Offset in die Zielformate für IPTC und gibt
-# ------------------------------------------------------------------------------
-#  Copyright (C) 2026 <ralfpeter.bergheim@gmail.com>
+#  Programm           : utils_datetime.py
+#  Version            : 2.0
+#  Beschreibung       : Keine Beschreibung verfügbar.
+#  Zeilen             : 561
+#  Abhängigkeiten     : datetime, fractions, re, typing, zoneinfo
+#  Externe Frameworks : tzlocal
+#  Klassen            : DateTimeUtils
 # ------------------------------------------------------------------------------
 
 import re

@@ -1,39 +1,20 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 10-08-2026
+# 13-08-2026
 # RalfPeter <ralfpeter.bergheim@gmail.com>
 # https://github.com/RalfPeter/
 #
 # Released under GNU GENERAL PUBLIC LICENSE v3. (Use at your own risk)
 # ------------------------------------------------------------------------------
-#  Programm          : utils_filepath.py
-#  Version           : 2.0
-#  Beschreibung      : Keine Beschreibung verfügbar.
-#  Zeilen            : 417
-#  Abhängigkeiten    : datetime, pathlib, platform, re, sys, tempfile
-#  Klassen           : PathUtils
-# ------------------------------------------------------------------------------
-#  Public Methoden:
-#    PathUtils                                            → Statische Klasse zur Kapselung aller Hilfsfunktionen für Dateipfade und
-#      validate_input_directories(list[str], bool)        → Prüft, ob alle Pfade in `inputpaths` existierende Verzeichnisse sind.
-#      get_subdirectories(list[str], bool)                → Gibt eine sortierte Liste aller Unterverzeichnisse (einschließlich der
-#      safe_rename(Path | str, Path | str, bool)          → Benennt eine Datei sicher um und behandelt gängige Fehler (FileNotFound,
-#      get_basename_without_prefix(Path | str)            → Extrahiert den Basisnamen einer Datei, entfernt dabei einen
-#      create_new_filepath(Path | str, datetime)          → Erzeugt einen neuen Dateipfad basierend auf einem datetime-Objekt und
-#      rename_file_with_datetime(Path | str, 
-#                                datetime)                → Benennt eine Datei anhand eines datetime-Objekts um, falls der
-#      is_writable(Path)                                  → Prüft, ob in das angegebene Verzeichnis geschrieben werden kann.
-#      get_config_dir(str, bool)                          → Ermittelt das plattformspezifische Verzeichnis für Konfigurationsdateien.
-#      get_script_dir(bool)                               → Gibt den Pfad des Ordners zurück, in dem das Skript/die ausführbare Datei
-#      get_main_script_name()                             → Gibt den reinen Dateinamen des gestarteten Hauptskripts zurück.
-#      get_script_name(str, bool)                         → Gibt den reinen Dateinamen des gestarteten Hauptskripts oder der EXE zurück.
-#      get_temp_dir(bool)                                 → Ermittelt das systemweite Verzeichnis für temporäre Dateien.
-#      get_work_dir(bool)                                 → Gibt den Pfad des temporären Ordners zurück, falls das Skript
-#      get_data_dir(str, bool)                            → Gibt den Path zum Datenordner ('data') im Skript / Config Verzeichnis zurück.
-#      get_resource_dir()                                 → Gibt den Path zum Ressourcenordner ('resources') im im Skriptverzeichnis zurück.
-#      get_ui_dir()                                       → Path of UI folder
-# ------------------------------------------------------------------------------
-#  Copyright (C) 2026 <ralfpeter.bergheim@gmail.com>
+#  Programm           : utils_filepath.py
+#  Version            : 2.0
+#  Beschreibung       : Keine Beschreibung verfügbar.
+#  Zeilen             : 417
+#  Abhängigkeiten     : argparse, ctypes, dataclasses, datetime, enum, fractions, http, inspect, logging, pathlib
+#                       platform, re, sys, tempfile, textwrap, traceback, typing, zoneinfo
+#  Externe Frameworks : requests, tzlocal, yaml
+#  Eigene Frameworks  : rpg_utils
+#  Klassen            : PathUtils
 # ------------------------------------------------------------------------------
 
 import sys

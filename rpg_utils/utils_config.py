@@ -1,29 +1,20 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 10-08-2026
+# 13-08-2026
 # RalfPeter <ralfpeter.bergheim@gmail.com>
 # https://github.com/RalfPeter/
 #
 # Released under GNU GENERAL PUBLIC LICENSE v3. (Use at your own risk)
 # ------------------------------------------------------------------------------
-#  Programm          : utils_config.py
-#  Version           : 2.0
-#  Beschreibung      : Keine Beschreibung verfügbar.
-#  Zeilen            : 236
-#  Abhängigkeiten    : argparse, dataclasses, pathlib, sys, typing, yaml
-#  Klassen           : BaseConfig, DataclassFieldsMeta, BaseParameters
-# ------------------------------------------------------------------------------
-#  Public Methoden:
-#    BaseConfig                                           → Zentrale Pfade zu Konfigurations-, UI- und Icon-Dateien.
-#      get_app_name()                                     → Gibt den Namen der Applikation zurück.
-#
-#    BaseParameters                                       → Universelle Basisklasse für die typsichere Verwaltung, CLI-Parsing und
-#      update_from_namespace(Namespace)                   → Aktualisiert alle passenden Attribute dieser Instanz dynamisch aus einem CLI-Namespace.
-#      save_to_yaml()                                     → Speichert die aktuellen Parameter sauber im YAML-Format.
-#      load_from_yaml()                                   → Lädt Parameter aus einer YAML-Datei und aktualisiert die Instanz sicher.
-#      parse_args()                                       → Parst die standardmäßigen Kommandozeilenparameter für die Anwendung.
-# ------------------------------------------------------------------------------
-#  Copyright (C) 2026 <ralfpeter.bergheim@gmail.com>
+#  Programm           : utils_config.py
+#  Version            : 2.0
+#  Beschreibung       : Keine Beschreibung verfügbar.
+#  Zeilen             : 236
+#  Abhängigkeiten     : argparse, ctypes, dataclasses, datetime, enum, fractions, http, inspect, logging, pathlib
+#                       platform, re, sys, tempfile, textwrap, traceback, typing, zoneinfo
+#  Externe Frameworks : requests, tzlocal, yaml
+#  Eigene Frameworks  : rpg_utils
+#  Klassen            : BaseConfig, BaseParameters, DataclassFieldsMeta
 # ------------------------------------------------------------------------------
 
 from __future__ import annotations

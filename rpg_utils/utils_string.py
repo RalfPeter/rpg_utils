@@ -1,29 +1,17 @@
 #!/usr/bin/env python
 # ------------------------------------------------------------------------------
-# 10-08-2026
+# 13-08-2026
 # RalfPeter <ralfpeter.bergheim@gmail.com>
 # https://github.com/RalfPeter/
 #
 # Released under GNU GENERAL PUBLIC LICENSE v3. (Use at your own risk)
 # ------------------------------------------------------------------------------
-#  Programm          : utils_string.py
-#  Version           : 2.0
-#  Beschreibung      : Keine Beschreibung verfügbar.
-#  Zeilen            : 125
-#  Abhängigkeiten    : datetime, typing
-#  Klassen           : StringUtils
-# ------------------------------------------------------------------------------
-#  Public Methoden:
-#    StringUtils                                          → Statische Klasse zur Kapselung von String-Operationen wie
-#      decode_bytes(bytes | str)                          → Konvertiert ein Byte-Objekt in einen String mittels UTF-8 oder gibt
-#      replace_placeholders(str, datetime, str, 
-#                           str, str)                     → Ersetzt Platzhalter im gegebenen Muster robust gegen doppelte '%'
-#      safe_str(Any, str)                                 → Wandelt einen Wert in String um oder gibt Default zurück.
-# ------------------------------------------------------------------------------
-#  Globale Funktionen:
-#    sstr(Any, str)                                       → Wandelt einen Wert in String um oder gibt Default zurück.
-# ------------------------------------------------------------------------------
-#  Copyright (C) 2026 <ralfpeter.bergheim@gmail.com>
+#  Programm           : utils_string.py
+#  Version            : 2.0
+#  Beschreibung       : Keine Beschreibung verfügbar.
+#  Zeilen             : 125
+#  Abhängigkeiten     : datetime, typing
+#  Klassen            : StringUtils
 # ------------------------------------------------------------------------------
 
 from datetime import datetime
